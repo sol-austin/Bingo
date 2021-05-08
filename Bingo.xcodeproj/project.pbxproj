@@ -13,6 +13,7 @@
 		FF6A8E922646FD7C0058C618 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF6A8E912646FD7C0058C618 /* Preview Assets.xcassets */; };
 		FF6A8E9D2646FD7C0058C618 /* BingoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6A8E9C2646FD7C0058C618 /* BingoTests.swift */; };
 		FF6A8EA82646FD7C0058C618 /* BingoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6A8EA72646FD7C0058C618 /* BingoUITests.swift */; };
+		FF6A8EB626470D1F0058C618 /* BingoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6A8EB526470D1F0058C618 /* BingoData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		FF6A8EA32646FD7C0058C618 /* BingoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BingoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF6A8EA72646FD7C0058C618 /* BingoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BingoUITests.swift; sourceTree = "<group>"; };
 		FF6A8EA92646FD7C0058C618 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF6A8EB526470D1F0058C618 /* BingoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BingoData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			children = (
 				FF6A8E8A2646FD7A0058C618 /* BingoApp.swift */,
 				FF6A8E8C2646FD7A0058C618 /* ContentView.swift */,
+				FF6A8EB526470D1F0058C618 /* BingoData.swift */,
 				FF6A8E8E2646FD7C0058C618 /* Assets.xcassets */,
 				FF6A8E932646FD7C0058C618 /* Info.plist */,
 				FF6A8E902646FD7C0058C618 /* Preview Content */,
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF6A8EB626470D1F0058C618 /* BingoData.swift in Sources */,
 				FF6A8E8D2646FD7A0058C618 /* ContentView.swift in Sources */,
 				FF6A8E8B2646FD7A0058C618 /* BingoApp.swift in Sources */,
 			);
