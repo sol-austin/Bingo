@@ -73,13 +73,33 @@ struct BingoEditor: View {
     }
 }
 
-struct BingoCreator: View {
+struct BingoCreator: View, Equatable {
+    static func == (lhs: BingoCreator, rhs: BingoCreator) -> Bool {
+        return lhs.cards.count == rhs.cards.count && lhs.cards.count > 0
+    }
+    
     @Binding var cards: [BingoCard]
     let saveAction: () -> Void
+    @State private var data = BingoCard.Data()
     @Environment(\.scenePhase) private var scenePhase
     
     var body: some View {
         VStack {
+            Button("New") {
+                let newCard = BingoCard(title: "NewCard", items: [BingoItem(title: "Item1", completed: false),
+                    BingoItem(title: "Item2", completed: false),
+                    BingoItem(title: "Item3", completed: false),
+                    BingoItem(title: "Item4", completed: false),
+                    BingoItem(title: "Item5", completed: false),
+                    BingoItem(title: "Item6", completed: false),
+                    BingoItem(title: "Item7", completed: false),
+                    BingoItem(title: "Item8", completed: false),
+                    BingoItem(title: "Item9", completed: false)]
+
+                )
+                cards.append(newCard)
+
+            }
             NavigationView {
                 List(cards) { card in
                     NavigationLink(destination: BingoEditor(card: binding(for: card))) {
@@ -88,6 +108,7 @@ struct BingoCreator: View {
                 }
                 .onChange(of: scenePhase) { phase in
                     if phase == .inactive { saveAction() }
+                    saveAction()
                 }
             }
         }
@@ -126,7 +147,7 @@ struct ContentView: View {
         TabView {
             BingoCreator(cards: $data.cards) {
                 data.save()
-            }
+            }.equatable()
             .onAppear {
                 data.load()
             }
