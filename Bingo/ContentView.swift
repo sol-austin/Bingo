@@ -99,6 +99,9 @@ struct BingoCreator: View, Equatable {
                 cards.append(newCard)
 
             }
+            Button("Save") {
+                saveAction()
+            }
             NavigationView {
                 List(cards) { card in
                     NavigationLink(destination: BingoEditor(card: binding(for: card))) {
@@ -106,7 +109,7 @@ struct BingoCreator: View, Equatable {
                     }
                 }
                 .onChange(of: scenePhase) { phase in
-                    if phase == .inactive { saveAction() }
+                    if phase == .inactive && cards.count > 0 { saveAction() }
                     saveAction()
                 }
             }
@@ -122,7 +125,6 @@ struct BingoCreator: View, Equatable {
 }
 
 struct BingoGrid: View {
-    let data = (1...9).map { "Item \($0)" }
     @Binding var cards: [BingoCard]
 
     let columns = [
@@ -133,7 +135,7 @@ struct BingoGrid: View {
     
     var body: some View {
         LazyVGrid(columns: columns) {
-            ForEach(cards[0].items, id: \.self) {
+            ForEach(cards[0].items , id: \.self) {
                 item in Text(item.title).frame(minHeight:100)
             }
         }
@@ -156,6 +158,9 @@ struct ContentView: View {
             }
             BingoGrid(cards: $data.cards).tabItem {
                 Text("Tab 2")
+            }
+            .onAppear {
+                data.load()
             }
         }
     }
