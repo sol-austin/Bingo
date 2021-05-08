@@ -19,7 +19,7 @@ struct BingoItem: Identifiable, Codable, Hashable {
     }
 }
 
-struct BingoCard: Identifiable, Codable {
+struct BingoCard: Identifiable, Codable, Hashable {
     let id: UUID
     var title: String
     var items: [BingoItem]
@@ -95,7 +95,6 @@ struct BingoCreator: View, Equatable {
                     BingoItem(title: "Item7", completed: false),
                     BingoItem(title: "Item8", completed: false),
                     BingoItem(title: "Item9", completed: false)]
-
                 )
                 cards.append(newCard)
 
@@ -124,7 +123,8 @@ struct BingoCreator: View, Equatable {
 
 struct BingoGrid: View {
     let data = (1...9).map { "Item \($0)" }
-    
+    @Binding var cards: [BingoCard]
+
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -133,8 +133,8 @@ struct BingoGrid: View {
     
     var body: some View {
         LazyVGrid(columns: columns) {
-            ForEach(data, id: \.self) {
-                item in Text(item).frame(minHeight:100)
+            ForEach(cards[0].items, id: \.self) {
+                item in Text(item.title).frame(minHeight:100)
             }
         }
     }
@@ -154,7 +154,7 @@ struct ContentView: View {
             .tabItem {
                 Text("Tab 1")
             }
-            BingoGrid().tabItem {
+            BingoGrid(cards: $data.cards).tabItem {
                 Text("Tab 2")
             }
         }
