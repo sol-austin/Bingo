@@ -75,7 +75,6 @@ struct BingoEditor: View {
 
 struct BingoCreator: View {
     @Binding var cards: [BingoCard]
-    @State private var data = BingoCard.Data()
     let saveAction: () -> Void
     @Environment(\.scenePhase) private var scenePhase
     
