@@ -83,10 +83,13 @@ struct BingoCreator: View, Equatable {
     @State private var data = BingoCard.Data()
     @Environment(\.scenePhase) private var scenePhase
     
+    @State var newTitle: String = "New title"
+    
     var body: some View {
         VStack {
+            TextField("New title", text: $newTitle)
             Button("New") {
-                let newCard = BingoCard(title: "NewCard", items: [BingoItem(title: "Item1", completed: false),
+                let newCard = BingoCard(title: newTitle, items: [BingoItem(title: "Item1", completed: false),
                     BingoItem(title: "Item2", completed: false),
                     BingoItem(title: "Item3", completed: false),
                     BingoItem(title: "Item4", completed: false),
@@ -126,7 +129,7 @@ struct BingoCreator: View, Equatable {
 
 struct BingoGrid: View {
     @Binding var cards: [BingoCard]
-    @State var selectedCard = "Test1"
+    @State private var selectedCard = 0
     
     let columns = [
         GridItem(.flexible()),
@@ -137,12 +140,13 @@ struct BingoGrid: View {
     var body: some View {
         VStack{
             Picker("Select something", selection: $selectedCard) {
-                ForEach(cards, id: \.self) { card in
-                    Text(card.title)
+                ForEach(0..<cards.count, id: \.self) { index in
+                    Text(cards[index].title)
                 }
             }
+
             LazyVGrid(columns: columns) {
-                ForEach(cards[0].items , id: \.self) {
+                ForEach(cards[selectedCard].items , id: \.self) {
                     item in Text(item.title).frame(minHeight:100)
                 }
             }
