@@ -126,7 +126,8 @@ struct BingoCreator: View, Equatable {
 
 struct BingoGrid: View {
     @Binding var cards: [BingoCard]
-
+    @State var selectedCard = "Test1"
+    
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -134,9 +135,16 @@ struct BingoGrid: View {
     ]
     
     var body: some View {
-        LazyVGrid(columns: columns) {
-            ForEach(cards[0].items , id: \.self) {
-                item in Text(item.title).frame(minHeight:100)
+        VStack{
+            Picker("Select something", selection: $selectedCard) {
+                ForEach(cards, id: \.self) { card in
+                    Text(card.title)
+                }
+            }
+            LazyVGrid(columns: columns) {
+                ForEach(cards[0].items , id: \.self) {
+                    item in Text(item.title).frame(minHeight:100)
+                }
             }
         }
     }

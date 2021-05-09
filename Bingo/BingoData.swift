@@ -33,9 +33,11 @@ class BingoData: ObservableObject {
                     #endif
                     return
                 }
+                print(data)
                 guard let bingoCards = try? JSONDecoder().decode([BingoCard].self, from: data) else {
                     fatalError("Can't decode saved cards data.")
                 }
+                print(bingoCards)
                 DispatchQueue.main.async {
                     self?.cards = bingoCards
                 }
@@ -46,6 +48,9 @@ class BingoData: ObservableObject {
         print("save")
         DispatchQueue.global(qos: .background).async { [weak self] in
             guard let cards = self?.cards else { fatalError("Self out of scope") }
+            if (cards == []) {
+                fatalError("Can't save nothing")
+            }
             guard let data = try? JSONEncoder().encode(cards) else { fatalError("Error encoding data") }
             do {
                 let outfile = Self.fileURL
